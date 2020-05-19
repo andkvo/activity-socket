@@ -10,7 +10,7 @@ class State {
 }
 
 interface IMessage {
-  timeStamp: number;
+  timeStamp: Date;
   data: string;
 }
 
@@ -26,7 +26,7 @@ class App extends Component<{}, State> {
     };
     client.onmessage = (message: IMessageEvent) => {
       console.log(message);
-      const recdDate = new Date().valueOf();
+      const recdDate = new Date();
       this.setState((prevState) => ({
         messages: prevState.messages.concat([{ data: message.data.toString(), timeStamp: recdDate }]).sort((a: any, b: any) => b.timeStamp - a.timeStamp)
       }))
@@ -45,8 +45,8 @@ class App extends Component<{}, State> {
           animation='slide down'
         >
           {this.state.messages.map((m) => (
-            <List.Item key={(m as any).timeStamp}>
-              <List.Content header={_.startCase(`${(m as any).timeStamp} - ${m.data.toString()}`)} />
+            <List.Item key={m.timeStamp.toString()}>
+              <List.Content header={`${m.timeStamp.toLocaleTimeString()} - ` + _.startCase(`${m.data.toString()}`)} />
             </List.Item>
           ))}
         </Transition.Group>
