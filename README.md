@@ -1,3 +1,13 @@
+# To start the server
+
+node ./server/index.js
+
+# To start the client
+
+npm start
+
+# Boilerplate
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
